@@ -77,7 +77,7 @@ defined(CONFIG_MX6DL)) && !defined(CONFIG_MX6SOLO)
 #define CONFIG_SYS_LOAD_ADDR	CONFIG_LOADADDR
 
 #ifndef CONFIG_BOOTDELAY
-#define CONFIG_BOOTDELAY	3
+#define CONFIG_BOOTDELAY	1
 #endif
 
 /* allow to overwrite serial and ethaddr */
@@ -109,6 +109,12 @@ defined(CONFIG_MX6DL)) && !defined(CONFIG_MX6SOLO)
 #ifndef CONFIG_SYS_DCACHE_OFF
 #define CONFIG_CMD_CACHE
 #endif
+
+/* NET */
+#define CONFIG_IPADDR		192.168.1.6
+#define CONFIG_SERVERIP		192.168.1.101
+#define CONFIG_NETMASK		255.255.255.0
+#define CONFIG_GATEWAYIP	192.168.1.6
 
 /* GPIO */
 #define CONFIG_MXC_GPIO

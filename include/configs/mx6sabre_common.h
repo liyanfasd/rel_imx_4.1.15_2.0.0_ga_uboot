@@ -44,7 +44,8 @@
 #define IMX_FEC_BASE			ENET_BASE_ADDR
 #define CONFIG_FEC_XCV_TYPE		RGMII
 #define CONFIG_ETHPRIME			"FEC"
-#define CONFIG_FEC_MXC_PHYADDR		1
+/* #define CONFIG_FEC_MXC_PHYADDR		1 */
+#define CONFIG_FEC_MXC_PHYADDR		0
 
 #define CONFIG_PHYLIB
 #define CONFIG_PHY_ATHEROS
@@ -134,10 +135,15 @@
 
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	CONFIG_MFG_ENV_SETTINGS \
+	"bootargs=noinitrd console=ttymxc0,115200 root=/dev/mmcblk3p1 rootwait rw init=/linuxrc\0" \
+	"bootcmd=run bootcmd_sd\0" \
+	"bootcmd_sd=mmc dev ${mmcdev}; mmc read ${loadaddr} 0x800 0x4000; mmc read ${fdt_addr} 0x4800 0x800; bootm ${loadaddr} - ${fdt_addr}\0" \
+	"bootcmd_net=tftpboot ${loadaddr} ${image}; tftpboot ${fdt_addr} ${fdt_file}; bootm ${loadaddr} - ${fdt_addr}\0" \
+	"ethaddr=12:34:56:78:9A:BC\0" \
 	"epdc_waveform=epdc_splash.bin\0" \
 	"script=boot.scr\0" \
-	"image=zImage\0" \
-	"fdt_file=undefined\0" \
+	"image=uImage\0" \
+	"fdt_file=imx6q-sabresd.dtb\0" \
 	"fdt_addr=0x18000000\0" \
 	"boot_fdt=try\0" \
 	"ip_dyn=yes\0" \
