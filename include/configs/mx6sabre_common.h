@@ -135,7 +135,7 @@
 
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	CONFIG_MFG_ENV_SETTINGS \
-	"bootargs=noinitrd console=ttymxc0,115200 root=/dev/mmcblk3p1 rootwait rw init=/linuxrc\0" \
+	"bootargs=noinitrd console=ttymxc0,115200 root=/dev/mmcblk3p1 rootwait rw init=/linuxrc video=mxcfb0:dev=hdmi,1920x1080M@60,if=RGB24,bpp=32 video=mxcfb1:off video=mxcfb2:off fbmem=48M\0" \
 	"bootcmd=run bootcmd_sd\0" \
 	"bootcmd_sd=mmc dev ${mmcdev}; mmc read ${loadaddr} 0x800 0x4000; mmc read ${fdt_addr} 0x4800 0x800; bootm ${loadaddr} - ${fdt_addr}\0" \
 	"bootcmd_net=tftpboot ${loadaddr} ${image}; tftpboot ${fdt_addr} ${fdt_file}; bootm ${loadaddr} - ${fdt_addr}\0" \
