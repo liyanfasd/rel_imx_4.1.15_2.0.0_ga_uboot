@@ -890,8 +890,24 @@ int board_ehci_power(int port, int on)
 }
 #endif
 
+static iomux_v3_cfg_t const leds_pads[] = {
+	MX6_PAD_EIM_A25__GPIO5_IO02 | MUX_PAD_CTRL(NO_PAD_CTRL),
+	MX6_PAD_GPIO_19__GPIO4_IO05 | MUX_PAD_CTRL(NO_PAD_CTRL),
+	MX6_PAD_EIM_D30__GPIO3_IO30 | MUX_PAD_CTRL(NO_PAD_CTRL),
+};
+
+static void setup_leds(void)
+{
+	imx_iomux_v3_setup_multiple_pads(leds_pads, ARRAY_SIZE(leds_pads));
+	gpio_direction_output(IMX_GPIO_NR(5, 2), 1);
+	gpio_direction_output(IMX_GPIO_NR(4, 5), 0);
+	gpio_direction_output(IMX_GPIO_NR(3, 30), 0);
+}
+
 int board_early_init_f(void)
 {
+	setup_leds();
+
 	setup_iomux_uart();
 #if defined(CONFIG_VIDEO_IPUV3)
 	setup_display();
